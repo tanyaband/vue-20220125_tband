@@ -11,7 +11,7 @@ const app = createApp({
 
   computed: {
     result() {
-      if (!this.firstvalue || !this.secondvalue || !this.operation) {
+      if (this.firstvalue == null || this.firstvalue === '' || this.secondvalue == null || this.secondvalue === '') {
         return null;
       }
       switch (this.operation) {
