@@ -10,7 +10,7 @@ export default defineComponent({
   },
 
   computed: {
-    dateForUser() {
+    dateLocal() {
       return new Date(this.date).toLocaleDateString(navigator.language, {
         year: 'numeric',
         month: 'short',
@@ -35,7 +35,7 @@ export default defineComponent({
       </li>
       <li>
         <img class="icon meetup-info__icon" alt="icon" src="/assets/icons/icon-cal-lg.svg" />
-        <time :datetime="dateISO">{{ dateForUser }}</time>
+        <time :datetime="dateISO">{{ dateLocal }}</time>
       </li>
     </ul>`,
 });
