@@ -9,7 +9,7 @@ export default defineComponent({
   },
 
   props: {
-    agenda: { type: Array, require: true, default: () => [] },
+    agenda: { type: Array, required: true, default: () => [] },
   },
 
   template: `
