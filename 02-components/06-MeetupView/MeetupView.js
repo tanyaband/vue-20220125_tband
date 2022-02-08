@@ -28,7 +28,7 @@ export default defineComponent({
   template: `
     <div>
       <!-- meetup cover-->
-      // <meetup-cover :title="meetup.title" :image="meetup.image"/>
+      <meetup-cover :title="meetup.title" :image="meetup.image"/>
 
       <ui-container>
         <div class="meetup">
