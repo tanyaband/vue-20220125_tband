@@ -1,14 +1,16 @@
 <template>
   <div class="toasts">
-    <div class="toast toast_success">
-      <ui-icon class="toast__icon" icon="check-circle" />
-      <span>Success Toast Example</span>
-    </div>
+    <template v-for="toast in toasts">
+      <div v-if="toast.type == 'success'" class="toast toast_success">
+        <ui-icon class="toast__icon" icon="check-circle" />
+        <span>{{ toast.message }}</span>
+      </div>
 
-    <div class="toast toast_error">
-      <ui-icon class="toast__icon" icon="alert-circle" />
-      <span>Error Toast Example</span>
-    </div>
+      <div v-else-if="toast.type == 'error'" class="toast toast_error">
+        <ui-icon class="toast__icon" icon="alert-circle" />
+        <span>{{ toast.message }}</span>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -19,6 +21,27 @@ export default {
   name: 'TheToaster',
 
   components: { UiIcon },
+
+  data() {
+    return {
+      toasts: [],
+      showtime: 5000,
+    };
+  },
+
+  methods: {
+    success(message) {
+      this.toasts.push({ type: 'success', message: message, timer: this.setTimeout() });
+    },
+
+    error(message) {
+      this.toasts.push({ type: 'error', message: message, timer: this.setTimeout() });
+    },
+
+    setTimeout() {
+      return setTimeout(() => this.toasts.splice(0, 1), this.showtime);
+    },
+  },
 };
 </script>
 
