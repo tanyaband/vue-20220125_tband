@@ -1,13 +1,8 @@
 <template>
   <div class="toasts">
     <template v-for="toast in toasts">
-      <div v-if="toast.type == 'success'" class="toast toast_success">
-        <ui-icon class="toast__icon" icon="check-circle" />
-        <span>{{ toast.message }}</span>
-      </div>
-
-      <div v-else-if="toast.type == 'error'" class="toast toast_error">
-        <ui-icon class="toast__icon" icon="alert-circle" />
+      <div class="toast" :class="getClass(toast)">
+        <ui-icon class="toast__icon" :icon="getIcon(toast)" />
         <span>{{ toast.message }}</span>
       </div>
     </template>
@@ -36,6 +31,28 @@ export default {
 
     error(message) {
       this.toasts.push({ type: 'error', message: message, timer: this.setTimeout() });
+    },
+
+    getClass(toast) {
+      switch (toast.type) {
+        case 'success':
+          return 'toast_success';
+        case 'error':
+          return 'toast_error';
+        default:
+          return '';
+      }
+    },
+
+    getIcon(toast) {
+      switch (toast.type) {
+        case 'success':
+          return 'check-circle';
+        case 'error':
+          return 'alert-circle';
+        default:
+          return '';
+      }
     },
 
     setTimeout() {
