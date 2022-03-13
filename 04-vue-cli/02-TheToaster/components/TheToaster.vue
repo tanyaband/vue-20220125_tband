@@ -1,8 +1,8 @@
 <template>
   <div class="toasts">
     <template v-for="toast in toasts">
-      <div class="toast" :class="getClass(toast)">
-        <ui-icon class="toast__icon" :icon="getIcon(toast)" />
+      <div class="toast" :class="toast.class">
+        <ui-icon class="toast__icon" :icon="toast.icon" />
         <span>{{ toast.message }}</span>
       </div>
     </template>
@@ -26,33 +26,23 @@ export default {
 
   methods: {
     success(message) {
-      this.toasts.push({ type: 'success', message: message, timer: this.setTimeout() });
+      this.toasts.push({
+        type: 'success',
+        message: message,
+        class: 'toast_success',
+        icon: 'check-circle',
+        timer: this.setTimeout(),
+      });
     },
 
     error(message) {
-      this.toasts.push({ type: 'error', message: message, timer: this.setTimeout() });
-    },
-
-    getClass(toast) {
-      switch (toast.type) {
-        case 'success':
-          return 'toast_success';
-        case 'error':
-          return 'toast_error';
-        default:
-          return '';
-      }
-    },
-
-    getIcon(toast) {
-      switch (toast.type) {
-        case 'success':
-          return 'check-circle';
-        case 'error':
-          return 'alert-circle';
-        default:
-          return '';
-      }
+      this.toasts.push({
+        type: 'error',
+        message: message,
+        class: 'toast_error',
+        icon: 'alert-circle',
+        timer: this.setTimeout(),
+      });
     },
 
     setTimeout() {
